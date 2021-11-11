@@ -15,6 +15,17 @@ services:
       - /home/lord/workspace/elasticsearch:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+
+  cerebro: 
+    image: lmenezes/cerebro:0.8.3
+    container_name: cerebro-container
+    ports:
+      - "9000:9000"
+    networks:
+      - es-net
+    command:
+      - -Dhosts.0.host=http://elasticsearch:9200
+
   kibana:
     container_name: kb-container
     image: kibana:7.14.2
